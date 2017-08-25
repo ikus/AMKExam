@@ -10,8 +10,11 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.evernet.amkdiscography.R;
+import com.evernet.amkdiscography.app.flow.ScreenManager;
 import com.evernet.amkdiscography.control.store.adapter.CategoryRecyclerViewAdapter;
-import com.evernet.amkdiscography.control.store.ui.model.Category;
+import com.evernet.amkdiscography.control.store.ui.constructor.CategoriesFilterView;
+import com.evernet.amkdiscography.control.store.ui.model.CategoryModel;
+import com.evernet.amkdiscography.webservice.controller.CategoryController;
 
 import java.util.ArrayList;
 
@@ -21,12 +24,9 @@ import butterknife.ButterKnife;
  * Created by Emisael Calderon on 8/24/2017.
  */
 
-public class FirstFilterFragment extends Fragment {
+public class FirstFilterFragment extends Fragment implements CategoriesFilterView, CategoryRecyclerViewAdapter.CategoriesListener {
     private static final String TAG = FirstFilterFragment.class.getSimpleName();
     private CategoryRecyclerViewAdapter mCategoryAdapter;
-    private RecyclerView rvFlashCard;
-    private RecyclerView.LayoutManager mLayoutManager;
-    private ArrayList<Category> listFlashcard;
 
     public static FirstFilterFragment newInstance() {
         FirstFilterFragment fragment = new FirstFilterFragment();
@@ -67,43 +67,27 @@ public class FirstFilterFragment extends Fragment {
             }
         });
 
-        getRvFlashCard(root).setAdapter(getFlashCardAdapter());
-
-        if (savedInstanceState != null) {
-            listFlashcard = savedInstanceState.getParcelableArrayList(Category.TAG_LIST);
-            getFlashCardAdapter().swapItems(listFlashcard);
-        } else {
-            //fetchFlashCardFromDb();
-        }
-
-
-        listFlashcard = new ArrayList<>();
-        listFlashcard.add(new Category("Name1"));
-        listFlashcard.add(new Category("Name2"));
-        listFlashcard.add(new Category("Name3"));
-        listFlashcard.add(new Category("Name4"));
+        mCategoryAdapter = new CategoryRecyclerViewAdapter();
+        cardRecyclerView.setAdapter(mCategoryAdapter);
+        mCategoryAdapter.notifyDataSetChanged();
         return root;
     }
 
-
-    public RecyclerView getRvFlashCard(View root) {
-        if (rvFlashCard == null) {
-            rvFlashCard = (RecyclerView) root.findViewById(R.id.category_recycler_view);
-            mLayoutManager = new LinearLayoutManager(getActivity());
-            rvFlashCard.setLayoutManager(mLayoutManager);
-            rvFlashCard.setHasFixedSize(true);
-        }
-        return rvFlashCard;
+    @Override
+    public void onResume() {
+        super.onResume();
+        CategoryController ctrl = new CategoryController();
+        ctrl.start(this);
     }
 
 
-    public CategoryRecyclerViewAdapter getFlashCardAdapter() {
-        if (mCategoryAdapter == null)
-            mCategoryAdapter = new CategoryRecyclerViewAdapter();
-        return mCategoryAdapter;
+    @Override
+    public void updateCategories(ArrayList<CategoryModel> categories) {
+        mCategoryAdapter.swapItems(categories);
     }
 
-
-
-
+    @Override
+    public void onClickItem(CategoryModel category) {
+        ScreenManager.getInstance().showSecondFilter(getActivity(), category);
+    }
 }

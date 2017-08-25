@@ -8,6 +8,8 @@ import com.evernet.amkdiscography.R;
 import com.evernet.amkdiscography.control.loggin.LoginActivity;
 import com.evernet.amkdiscography.control.store.ui.StoreActivity;
 import com.evernet.amkdiscography.control.store.ui.fragment.FirstFilterFragment;
+import com.evernet.amkdiscography.control.store.ui.fragment.SecondFilterFragment;
+import com.evernet.amkdiscography.control.store.ui.model.CategoryModel;
 
 /**
  * Created by Emisael Calderon on 8/24/2017.
@@ -20,14 +22,13 @@ public class ScreenManager {
         return new ScreenManager();
     }
 
-    public void restart(FragmentActivity origin) {
-        //LocalBroadcastManager.getInstance(origin).sendBroadcast(new Intent(LogoutReceiver.ACTION_LOGOUT));
-        //showLoginScreen(origin);
-    }
+
 
     public void showStoreActivity(FragmentActivity origin) {
         Intent intent = new Intent(origin, StoreActivity.class);
-        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
+        intent.setFlags(
+                Intent.FLAG_ACTIVITY_CLEAR_TASK |
+                Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
         origin.startActivity(intent);
     }
 
@@ -44,7 +45,15 @@ public class ScreenManager {
                 .beginTransaction()
                 .replace(R.id.content, fragmentFirstFilter)
                 .commit();
-        //listBackStackFragment(fragmentactivity);
+    }
+
+    public void showSecondFilter(FragmentActivity fragmentactivity, CategoryModel categoryModel) {
+        SecondFilterFragment fragment = SecondFilterFragment.newInstance(categoryModel);
+        fragmentactivity.getSupportFragmentManager().popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
+        fragmentactivity.getSupportFragmentManager()
+                .beginTransaction()
+                .replace(R.id.content, fragment)
+                .commit();
     }
 }
 

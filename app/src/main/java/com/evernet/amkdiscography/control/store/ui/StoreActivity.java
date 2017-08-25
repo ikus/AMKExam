@@ -10,6 +10,8 @@ import android.widget.Toast;
 
 import com.evernet.amkdiscography.R;
 import com.evernet.amkdiscography.app.flow.ScreenManager;
+import com.evernet.amkdiscography.app.flow.utils.Const;
+import com.evernet.amkdiscography.app.flow.utils.SharedPreferencesUtil;
 
 import butterknife.ButterKnife;
 
@@ -26,9 +28,6 @@ public class StoreActivity extends AppCompatActivity {
         setContentView(R.layout.activity_store);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        //setTheme(R.style.MaterialTheme); // for Custom theme)
-        //getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        //getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_arrow_back);
         ButterKnife.bind(this);
     }
 
@@ -36,6 +35,7 @@ public class StoreActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         ScreenManager.getInstance().showFirstFilter(StoreActivity.this);
+
     }
 
     @Override
@@ -45,15 +45,13 @@ public class StoreActivity extends AppCompatActivity {
     }
 
 
-
-
-
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.action_logout:
-                //ScreenManager.showSettingsScreen(this);
+                SharedPreferencesUtil.setAppPreference(Const.IS_LOGGED, false);
                 Toast.makeText(this, "Bye", Toast.LENGTH_LONG).show();
+                ScreenManager.getInstance().showLoginActivity(StoreActivity.this);
                 return true;
             default:
                 return super.onOptionsItemSelected(item);

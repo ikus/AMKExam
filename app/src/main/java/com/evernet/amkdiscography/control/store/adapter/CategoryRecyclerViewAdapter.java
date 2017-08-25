@@ -6,7 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.evernet.amkdiscography.R;
-import com.evernet.amkdiscography.control.store.ui.model.Category;
+import com.evernet.amkdiscography.control.store.ui.model.CategoryModel;
 
 import java.util.ArrayList;
 
@@ -15,7 +15,15 @@ import java.util.ArrayList;
  */
 
 public class CategoryRecyclerViewAdapter extends RecyclerView.Adapter<CategoryItemHolder> {
-    private ArrayList<Category> listCategories;
+    private ArrayList<CategoryModel> listCategories;
+
+    public CategoryRecyclerViewAdapter() {
+        this.listCategories = new ArrayList<>();
+    }
+
+    public CategoryRecyclerViewAdapter(ArrayList<CategoryModel> listCategories) {
+        this.listCategories = listCategories;
+    }
     //private RecyclerViewListener mListener;
 
     @Override
@@ -27,32 +35,39 @@ public class CategoryRecyclerViewAdapter extends RecyclerView.Adapter<CategoryIt
 
     @Override
     public void onBindViewHolder(CategoryItemHolder holder, int position) {
-//        final Insect mInsect = getItem(position);
-//        holder.getTvCommonName().setText(mInsect.name);
-//        holder.getTvScientificLevel().setText(mInsect.scientificName);
-//        holder.getTvDangerLevel().setDangerLevel(mInsect.dangerLevel);
-//
-//        holder.getView().setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                mListener.onItemClick(position);
-//            }
-//        });
+        final CategoryModel mCategory = getItem(position);
+        holder.getTv_input_name().setText(mCategory.getName());
+        holder.getIconService().setImageURI(mCategory.getUrlPrevew());
+        holder.getView().setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+    }
+
+    private CategoryModel getItem(int index) {
+        return listCategories.get(index);
     }
 
     @Override
     public int getItemCount() {
-        return 0;
+        if (listCategories == null) return 0;
+        return listCategories.size();
     }
 
-    public void swapItems(ArrayList<Category> categories) {
+    public void swapItems(ArrayList<CategoryModel> categories) {
+        if (listCategories == null) listCategories = new ArrayList<>();
         listCategories.clear();
         listCategories.addAll(categories);
-        //DebugUtils.logDebug("TotalItems:: ", flashcards.size());
         notifyDataSetChanged();
     }
 
     public boolean isEmpty() {
         return listCategories.isEmpty();
+    }
+
+    public interface CategoriesListener {
+        void onClickItem(CategoryModel mCategory);
     }
 }

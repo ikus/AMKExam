@@ -46,13 +46,7 @@ public class SplashActivity extends AppCompatActivity {
         }
 
         List<String> permissions = new ArrayList<>();
-        checkForPermission(permissions, Manifest.permission.ACCESS_FINE_LOCATION);
-        checkForPermission(permissions, Manifest.permission.READ_PHONE_STATE);
         checkForPermission(permissions, Manifest.permission.WRITE_EXTERNAL_STORAGE);
-        checkForPermission(permissions, Manifest.permission.CAMERA);
-        checkForPermission(permissions, Manifest.permission.READ_CONTACTS);
-        checkForPermission(permissions, Manifest.permission.CALL_PHONE);
-        checkForPermission(permissions, Manifest.permission.RECEIVE_SMS);
         if (permissions.size() > 0) {
             ActivityCompat.requestPermissions(this, permissions.toArray(new String[permissions.size()]), REQUEST_PERMISSION_CODE);
         } else
@@ -70,11 +64,6 @@ public class SplashActivity extends AppCompatActivity {
     }
 
     private void resumeNormalFlow() {
-
-        //    navigate();
-        //    return;
-
-
         handler = new Handler();
         handler.postDelayed(delayedNavigation, 2000);
     }

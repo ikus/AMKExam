@@ -1,48 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:fresco="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:foreground="?attr/selectableItemBackground"
-    android:orientation="horizontal"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingEnd="@dimen/activity_horizontal_margin"
-    android:paddingStart="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
+    android:layout_height="wrap_content">
 
-    >
 
-    <ImageView
-        android:id="@+id/tv_danger_level"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:gravity="center"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:textColor="@android:color/white" />
+    <com.facebook.drawee.view.SimpleDraweeView
+        android:id="@+id/idCategory"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="30dp"
+        android:scaleType="centerInside"
+        android:src="@drawable/ic_add"
+        android:visibility="visible"
+        fresco:actualImageScaleType="centerInside"
+        fresco:failureImage="@drawable/ic_add" />
 
     <LinearLayout
+        android:layout_centerVertical="true"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="@dimen/activity_horizontal_margin"
-        android:orientation="vertical"
-        android:weightSum="1">
+        android:layout_toRightOf="@+id/idCategory"
+        android:orientation="vertical">
 
-        <android.support.v7.widget.AppCompatTextView
+        <android.support.v7.widget.AppCompatTextView xmlns:android="http://schemas.android.com/apk/res/android"
             android:id="@+id/tv_item_common_name"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight=".5"
+            android:layout_height="wrap_content"
             android:ellipsize="marquee"
-            android:textAppearance="?android:attr/textAppearanceLarge" />
-
-        <android.support.v7.widget.AppCompatTextView
-            android:id="@+id/tv_item_scientific_name"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight=".5"
-            android:ellipsize="marquee"
-            android:textAppearance="?android:attr/textAppearanceMedium" />
-
+            android:text="Hola"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:textColor="@android:color/black" />
     </LinearLayout>
+</RelativeLayout>
 
-</LinearLayout>
+
+

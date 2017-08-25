@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.evernet.amkdiscography.R;
+import com.evernet.amkdiscography.control.store.ui.model.CategoryModel;
 
 import butterknife.ButterKnife;
 
@@ -15,8 +16,9 @@ import butterknife.ButterKnife;
  */
 
 public class SecondFilterFragment extends Fragment {
-    public static FirstFilterFragment newInstance() {
-        FirstFilterFragment fragment = new FirstFilterFragment();
+
+    public static SecondFilterFragment newInstance(CategoryModel categoryModel) {
+        SecondFilterFragment fragment = new SecondFilterFragment();
         Bundle bundle = new Bundle();
         fragment.setArguments(bundle);
         return fragment;

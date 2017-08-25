@@ -8,4 +8,8 @@
     <dimen name="fab_elevation">8dp</dimen>
     <dimen name="card_radius">4dp</dimen>
     <dimen name="card_padding">40dp</dimen>
+
+    <dimen name="dimen_2">16dp</dimen>
+    <dimen name="font_text_size_5">16sp</dimen>
+
 </resources>
