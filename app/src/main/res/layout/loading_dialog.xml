@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#B3545454"
+    android:orientation="vertical">
+
+    <FrameLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:layout_gravity="center"
+        android:background="@drawable/rect_area">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <com.rey.material.widget.ProgressView
+                android:id="@+id/progress"
+                android:layout_width="57dp"
+                android:layout_height="57dp"
+                android:layout_centerInParent="true"
+                android:layout_gravity="center"
+                android:layout_marginLeft="32dp"
+                android:layout_marginRight="32dp"
+                android:layout_marginTop="32dp"
+                android:layout_marginBottom="32dp"
+                app:pv_autostart="true"
+                app:pv_circular="true"
+                app:pv_progressMode="indeterminate"
+                app:pv_progressStyle="@style/Material.Drawable.CircularProgress" />
+
+            <android.support.v7.widget.AppCompatTextView
+                android:id="@+id/textLoading"
+                fontPath="fonts/Avenir-Book.otf"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/dimen_2"
+                android:layout_marginTop="@dimen/dimen_2"
+                android:ellipsize="end"
+                android:gravity="center"
+                android:lines="1"
+                android:text="@string/procesing"
+                android:textAllCaps="false"
+                android:textColor="@color/textAndFields"
+                android:textSize="@dimen/font_text_size_5"
+                android:visibility="gone" />
+
+        </LinearLayout>
+
+
+    </FrameLayout>
+
+</RelativeLayout>
